@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Aerosafe</string>
+    <string name="btn_search">Search</string>
+    <string name="btn_get_information">Get Informations</string>
+    <string name="btn_erase_all">Erase all</string>
+    <string name="inside_search_bar">Enter an ICAO code, an airport\'s name...</string>
+</resources>
