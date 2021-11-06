@@ -55,18 +55,17 @@ public class AirportListAdapter extends RecyclerView.Adapter<AirportListAdapter.
         return (listAirports==null)?0:listAirports.size();
     }
 
-    public void addToList(String code, String name, String country){
+    public void addToList(Airport airport){
         int i;
         boolean exist = false;
         for (i=0; i<listAirports.size();i++){
-            if(listAirports.get(i).icao == code){
+            if(listAirports.get(i).icao.equals(airport.icao)){
                 exist = true;
             }
         }
         Log.d("existe ?", String.valueOf(exist));
 
         if(exist == false) {
-            Airport airport = new Airport(code, name, country);
             listAirports.add(airport);
             notifyDataSetChanged();
         }

@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         AirportListAdapter mAdapter;
 
 
-        Intent ReIntent = getIntent();
+        Intent ReIntent = getIntent(); // Récupère le tableau d'aeroports
         if (ReIntent != null) {
             if (ReIntent.hasExtra("BUNDLE")) {
                 Bundle args = ReIntent.getBundleExtra("BUNDLE");
@@ -91,9 +91,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            //Log.d(TAG, "Erreur ?");
 
-            try {
+            try { // Parse JSON
                 JSONObject object = new JSONObject(readJSON());
                 JSONArray array = object.getJSONArray("data");
                 for (int i = 0; i < array.length(); i++) {
@@ -106,26 +105,22 @@ public class MainActivity extends AppCompatActivity {
                     } else {
                         Airport airport = new Airport(icao, name, country);
                         airports.add(airport);
-                        //Log.d(TAG, "onCreate: " + airport.icao);
                     }
 
                 }
-                //Log.d(TAG, "onCreate: " + airport);
             } catch (JSONException e) {
-                //Log.d(TAG, "onCreate erreur ?");
                 e.printStackTrace();
             }
 
 
             btnClear.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    mAdapter.clearList();
+                    mAdapter.clearList(); //effacer la liste d'aeroports recherchés
                 }
 
             });
 
-            btnMap.setOnClickListener(new View.OnClickListener() {
-
+            btnMap.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
                 public void onClick(View view) {
                     Bundle args = new Bundle();
                     args.putSerializable("ARRAYLIST",(Serializable)saveList);
@@ -134,16 +129,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            btnAdd.setOnClickListener(new View.OnClickListener() {
+            btnAdd.setOnClickListener(new View.OnClickListener() { // ajout
                 public void onClick(View view) {
                     if (!search.getText().toString().equals("")) {
                         for (Airport current : airports) {
                             if (search.getText().toString().toUpperCase().equals(current.icao)) {
-                                Log.d(TAG, "onClick: trouve !");
+                                //Log.d(TAG, "onClick: trouve !");
                                 Airport newSave = new Airport(current.icao, current.name, current.country);
-                                saveList.add(newSave);
-                                mAdapter.addToList(current.icao, current.name, current.country);
-                                mAdapter.notifyDataSetChanged();
+                                existOrNot(newSave);
+                                mAdapter.addToList(newSave);
                             }
                         }
 
@@ -196,7 +190,21 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
+    public void existOrNot(Airport airport) {
+        TextView search = findViewById(R.id.search);
+        int i;
+        boolean exist = false;
+        for (i = 0; i < saveList.size(); i++) {
+            if (saveList.get(i).icao.equals(airport.icao)) {
+                exist = true;
+            }
+        }
 
+        if (exist == false) {
+            saveList.add(airport);
+            search.setText("");
+        }
+    }
 
 
 }
