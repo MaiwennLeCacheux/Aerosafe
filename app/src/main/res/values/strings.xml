@@ -4,4 +4,15 @@
     <string name="btn_get_information">Get Informations</string>
     <string name="btn_erase_all">Erase all</string>
     <string name="inside_search_bar">Enter an ICAO code, an airport\'s name...</string>
+    <string name="info_airport_name">LFPG - Charles de Gaulle, Paris, France</string>
+    <string name="info_weather_conditions">Weather conditions on Tue, 12 Oct 2021 12:00:00 +0000 (14 min. ago):</string>
+    <string name="info_present_conditions">Present conditions: </string>
+    <string name="info_clouds">Clouds: </string>
+    <string name="info_visibility">Visibility: </string>
+    <string name="info_wind">Wind: </string>
+    <string name="info_temperature">Temperature: </string>
+    <string name="info_dew_point">Dew point: </string>
+    <string name="info_pressure">Pressure: </string>
+    <string name="info_remarks">Remarks: </string>
+
 </resources>
