@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardForegroundColor="#00FFFFFF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="#C3D7F4"
+        android:orientation="horizontal">
+
+
+        <!-- Title -->
+        <TextView
+            android:id="@+id/aeroport"
+            android:layout_width="70dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:gravity="center|left|center_vertical"
+            android:text="ICAO"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="#003451"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="225dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="110dp"
+            android:gravity="center|left|center_vertical"
+            android:text="name"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textColor="#003451"
+            android:textSize="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnDel"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/aeroport"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.555" />
+
+        <ImageButton
+            android:id="@+id/btnDel"
+            android:layout_width="29dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="4dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bin" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
