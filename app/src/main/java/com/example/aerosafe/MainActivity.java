@@ -61,9 +61,11 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(new AirportListAdapter(null, this));
         Button btnClear = findViewById(R.id.btnClear);
         Button btnAdd = findViewById(R.id.btnAdd);
+        Button btnGetInfo = findViewById(R.id.btn_get_information);
         TextView search = findViewById(R.id.search);
         ImageButton btnMap = findViewById(R.id.btnMap);
         Intent intent = new Intent(this, map.class);
+        Intent intentInfo = new Intent(this, Informations.class);
 
 
         ArrayList<Airport> bonneListe = new ArrayList<Airport>();
@@ -144,6 +146,15 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
+            });
+
+            btnGetInfo.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
+                public void onClick(View view) {
+                  /*  Bundle args = new Bundle();
+                    args.putSerializable("ARRAYLIST",(Serializable)saveList);
+                    intentInfo.putExtra("BUNDLE",args); */
+                    startActivity(intentInfo);
+                }
             });
         }
 
