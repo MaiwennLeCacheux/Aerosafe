@@ -111,7 +111,7 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                 startActivity(intentMap);
             }
         });
-
+        /*
         btnRight.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
             public void onClick(View view) {
                 Bundle args = new Bundle();
@@ -135,7 +135,7 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                 startActivity(intentPrevious);
             }
         });
-
+        */
 
     }
 
@@ -166,7 +166,7 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                 float valueX = x2 - x1;
                 //getting value for vertical swipe
                 float valueY = y2 - y1;
-
+                /*
                 if (Math.abs(valueX) > MIN_DISTANCE){
                     //detect left to right swipe
                     if(x2>x1){
@@ -194,8 +194,8 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                         startActivity(intentNext);
                     }
 
-                }
-                else if (Math.abs(valueY) > MIN_DISTANCE){
+                } */
+                if (Math.abs(valueY) > MIN_DISTANCE){
                     //detect top to bottom swipe
                     if(y2<y1){
 

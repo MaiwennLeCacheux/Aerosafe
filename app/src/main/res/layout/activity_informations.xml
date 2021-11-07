@@ -9,76 +9,88 @@
     android:background="#C3D7F4">
 
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/slideViewPager"
-        android:layout_width="304dp"
-        android:layout_height="655dp"
+        android:layout_width="411dp"
+        android:layout_height="658dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck">
 
-    </android.support.v4.view.ViewPager>
+    </androidx.viewpager.widget.ViewPager>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/dotsLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/btnLeft"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:layout_marginStart="5dp"
             android:background="#00FFFFFF"
             android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="@+id/btnMap"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/polygon_left"
-            tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="343dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/btnRight"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="5dp"
             android:background="#00FFFFFF"
             android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/polygon_right"
-            tools:layout_editor_absoluteX="362dp"
-            tools:layout_editor_absoluteY="343dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/btnMapUp"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
             android:background="#00FFFFFF"
             android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/map_up"
-            tools:layout_editor_absoluteX="176dp"
-            tools:layout_editor_absoluteY="666dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/btnHome"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:background="#00FFFFFF"
             android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/menu_home"
-            tools:layout_editor_absoluteX="343dp"
-            tools:layout_editor_absoluteY="666dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <ImageButton
             android:id="@+id/btnMap"
             android:layout_width="60dp"
             android:layout_height="60dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
             android:background="#00FFFFFF"
             android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:srcCompat="@drawable/menu_map"
-            tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="666dp"
-            tools:ignore="MissingConstraints" />
+            tools:ignore="SpeakableTextPresentCheck" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
