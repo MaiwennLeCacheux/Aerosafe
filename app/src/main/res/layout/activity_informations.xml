@@ -17,13 +17,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-
     </android.support.v4.view.ViewPager>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/dotsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -35,7 +33,8 @@
             android:scaleType="centerInside"
             app:srcCompat="@drawable/polygon_left"
             tools:layout_editor_absoluteX="5dp"
-            tools:layout_editor_absoluteY="343dp" />
+            tools:layout_editor_absoluteY="343dp"
+            tools:ignore="MissingConstraints" />
 
         <ImageButton
             android:id="@+id/btnRight"
@@ -45,7 +44,8 @@
             android:scaleType="centerInside"
             app:srcCompat="@drawable/polygon_right"
             tools:layout_editor_absoluteX="362dp"
-            tools:layout_editor_absoluteY="343dp" />
+            tools:layout_editor_absoluteY="343dp"
+            tools:ignore="MissingConstraints" />
 
         <ImageButton
             android:id="@+id/btnMapUp"
@@ -55,7 +55,8 @@
             android:scaleType="centerInside"
             app:srcCompat="@drawable/map_up"
             tools:layout_editor_absoluteX="176dp"
-            tools:layout_editor_absoluteY="666dp" />
+            tools:layout_editor_absoluteY="666dp"
+            tools:ignore="MissingConstraints" />
 
         <ImageButton
             android:id="@+id/btnHome"
@@ -65,7 +66,8 @@
             android:scaleType="centerInside"
             app:srcCompat="@drawable/menu_home"
             tools:layout_editor_absoluteX="343dp"
-            tools:layout_editor_absoluteY="666dp" />
+            tools:layout_editor_absoluteY="666dp"
+            tools:ignore="MissingConstraints" />
 
         <ImageButton
             android:id="@+id/btnMap"
@@ -75,7 +77,8 @@
             android:scaleType="centerInside"
             app:srcCompat="@drawable/menu_map"
             tools:layout_editor_absoluteX="8dp"
-            tools:layout_editor_absoluteY="666dp" />
+            tools:layout_editor_absoluteY="666dp"
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

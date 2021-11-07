@@ -43,7 +43,7 @@ public class SliderAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slide_layout, container, false);
 
-        TextView slideTitle = (TextView) view.findViewById(R.id.info_airport_name);
+        TextView slideTitle = (TextView) view.findViewById(R.id.title);
 
         slideTitle.setText(slide_titles[position]);
 

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class Informations extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
     ArrayList<Airport> airports = new ArrayList<>();
-    ArrayList<String> listTest = new ArrayList<>();
-    int nouvellePosition;
+    //ArrayList<String> listTest = new ArrayList<>();
+    //int nouvellePosition;
 
     //view pager
     private ViewPager mSlideViewPager;
@@ -57,9 +57,9 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
 
 
 
-        listTest.add("Test1");
+        /*listTest.add("Test1");
         listTest.add("Test2");
-        listTest.add("Test3");
+        listTest.add("Test3");*/
 
         //initialize gestureDetector
         this.gestureDetector = new GestureDetector(Informations.this, this);
@@ -71,14 +71,14 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
             if (ReIntent.hasExtra("BUNDLE")) {
                 Bundle args = ReIntent.getBundleExtra("BUNDLE");
                 airports = (ArrayList<Airport>) args.getSerializable("ARRAYLIST");
-                nouvellePosition = intent.getIntExtra("position", 0);
+                //nouvellePosition = intent.getIntExtra("position", 0);
                 Log.d("liste ?", airports.get(0).icao);
-                Log.d("position ", String.valueOf(nouvellePosition));
+               // Log.d("position ", String.valueOf(nouvellePosition));
 
-                //affichage dynamique du titre
+                /*affichage dynamique du titre
                 String message = listTest.get(nouvellePosition);
-                TextView titre = (TextView) findViewById(R.id.info_airport_name);
-                titre.setText(message);
+                TextView titre = (TextView) findViewById(R.id.title);
+                titre.setText(message);*/
             }
 
         }
@@ -117,9 +117,9 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                 Bundle args = new Bundle();
                 args.putSerializable("ARRAYLIST",(Serializable)airports);
                 intentNext.putExtra("BUNDLE",args);
-                nouvellePosition = nouvellePosition +1;
-                Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
-                intentNext.putExtra("position",nouvellePosition);
+                //nouvellePosition = nouvellePosition +1;
+              //  Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
+               // intentNext.putExtra("position",nouvellePosition);
                 startActivity(intentNext);
             }
         });
@@ -129,9 +129,9 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                 Bundle args = new Bundle();
                 args.putSerializable("ARRAYLIST",(Serializable)airports);
                 intentPrevious.putExtra("BUNDLE",args);
-                nouvellePosition = nouvellePosition -1;
-                Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
-                intentPrevious.putExtra("position",nouvellePosition);
+                //nouvellePosition = nouvellePosition -1;
+            //    Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
+               // intentPrevious.putExtra("position",nouvellePosition);
                 startActivity(intentPrevious);
             }
         });
@@ -175,9 +175,9 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                         Bundle args = new Bundle();
                         args.putSerializable("ARRAYLIST",(Serializable)airports);
                         intentPrevious.putExtra("BUNDLE",args);
-                        nouvellePosition = nouvellePosition -1;
-                        Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
-                        intentPrevious.putExtra("position",nouvellePosition);
+                      //  nouvellePosition = nouvellePosition -1;
+                     //   Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
+                      //  intentPrevious.putExtra("position",nouvellePosition);
                         startActivity(intentPrevious);
                     }
 
@@ -188,9 +188,9 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                         Bundle args = new Bundle();
                         args.putSerializable("ARRAYLIST",(Serializable)airports);
                         intentNext.putExtra("BUNDLE",args);
-                        nouvellePosition = nouvellePosition +1;
-                        Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
-                        intentNext.putExtra("position",nouvellePosition);
+                      //  nouvellePosition = nouvellePosition +1;
+                     //   Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
+                      //  intentNext.putExtra("position",nouvellePosition);
                         startActivity(intentNext);
                     }
 
