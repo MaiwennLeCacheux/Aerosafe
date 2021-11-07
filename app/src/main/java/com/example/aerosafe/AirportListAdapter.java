@@ -67,8 +67,8 @@ public class AirportListAdapter extends RecyclerView.Adapter<AirportListAdapter.
 
         if(exist == false) {
             listAirports.add(airport);
-            notifyDataSetChanged();
         }
+        notifyDataSetChanged();
     }
 
     public void clearList(){
