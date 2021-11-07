@@ -17,6 +17,7 @@ import java.util.ArrayList;
 public class Informations extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
     ArrayList<Airport> airports = new ArrayList<>();
+    ArrayList<String> listTest = new ArrayList<>();
     private static final String TAG = "Swipe Position";
     private float x1, x2, y1, y2;
     private static final int MIN_DISTANCE = 150;
@@ -34,7 +35,10 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
         ImageButton btnLeft = findViewById(R.id.btnLeft);
         Intent intent = new Intent(this, MainActivity.class);
         Intent intentMap = new Intent(this, map.class);
-        Intent intentMapUp = new Intent(this, MapUp.class);
+
+        listTest.add("Test1");
+        listTest.add("Test2");
+        listTest.add("Test3");
 
         //initialize gestureDetector
         this.gestureDetector = new GestureDetector(Informations.this, this);
@@ -60,14 +64,14 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
             }
         });
 
-        btnMapUp.setOnClickListener(new View.OnClickListener() {
+       /* btnMapUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Bundle args = new Bundle();
                 args.putSerializable("ARRAYLIST",(Serializable)airports);
                 intentMapUp.putExtra("BUNDLE",args);
                 startActivity(intentMapUp);
             }
-        });
+        }); */
 
         btnMap.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
             public void onClick(View view) {
@@ -82,11 +86,10 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
     }
 
     //override on touch event
-
-
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        Intent intentMapUp = new Intent(this, MapUp.class);
         gestureDetector.onTouchEvent(event);
 
         switch(event.getAction()){
@@ -122,21 +125,18 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                 }
                 else if (Math.abs(valueY) > MIN_DISTANCE){
                     //detect top to bottom swipe
-                    if(y2>y1){
-                        Toast.makeText(this, "Bottom is swipe", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "Bottom Swipe");
-                    }
+                    if(y2<y1){
 
-                    else{
                         //detect bottom to top swipe
-                        Toast.makeText(this, "Top is swipe", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "Top Swipe");
+                        //Toast.makeText(this, "Top is swipe", Toast.LENGTH_SHORT).show();
+                        //Log.d(TAG, "Top Swipe");
+                        Bundle args = new Bundle();
+                        args.putSerializable("ARRAYLIST",(Serializable)airports);
+                        intentMapUp.putExtra("BUNDLE",args);
+                        startActivity(intentMapUp);
                     }
                 }
-
-
         }
-
         return super.onTouchEvent(event);
     }
 
