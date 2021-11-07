@@ -1,6 +1,8 @@
 package com.example.aerosafe;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +11,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.Serializable;
@@ -18,6 +21,14 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
 
     ArrayList<Airport> airports = new ArrayList<>();
     ArrayList<String> listTest = new ArrayList<>();
+    int nouvellePosition;
+
+    //view pager
+    private ViewPager mSlideViewPager;
+    private ConstraintLayout mDotLayout;
+    private SliderAdapter sliderAdapter;
+
+    // swipe values
     private static final String TAG = "Swipe Position";
     private float x1, x2, y1, y2;
     private static final int MIN_DISTANCE = 150;
@@ -30,11 +41,21 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
 
         ImageButton btnHome = findViewById(R.id.btnHome);
         ImageButton btnMap = findViewById(R.id.btnMap);
-        ImageButton btnMapUp = findViewById(R.id.btnMapUp);
+        //ImageButton btnMapUp = findViewById(R.id.btnMapUp);
         ImageButton btnRight = findViewById(R.id.btnRight);
         ImageButton btnLeft = findViewById(R.id.btnLeft);
         Intent intent = new Intent(this, MainActivity.class);
         Intent intentMap = new Intent(this, map.class);
+        Intent intentNext = new Intent(Informations.this, Informations.class);
+        Intent intentPrevious = new Intent(Informations.this, Informations.class);
+
+        mSlideViewPager = (ViewPager)findViewById(R.id.slideViewPager);
+        mDotLayout = (ConstraintLayout)findViewById(R.id.dotsLayout);
+
+        sliderAdapter = new SliderAdapter(this);
+        mSlideViewPager.setAdapter(sliderAdapter);
+
+
 
         listTest.add("Test1");
         listTest.add("Test2");
@@ -50,10 +71,19 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
             if (ReIntent.hasExtra("BUNDLE")) {
                 Bundle args = ReIntent.getBundleExtra("BUNDLE");
                 airports = (ArrayList<Airport>) args.getSerializable("ARRAYLIST");
+                nouvellePosition = intent.getIntExtra("position", 0);
                 Log.d("liste ?", airports.get(0).icao);
+                Log.d("position ", String.valueOf(nouvellePosition));
+
+                //affichage dynamique du titre
+                String message = listTest.get(nouvellePosition);
+                TextView titre = (TextView) findViewById(R.id.info_airport_name);
+                titre.setText(message);
             }
 
         }
+
+
 
         btnHome.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -82,6 +112,30 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
             }
         });
 
+        btnRight.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
+            public void onClick(View view) {
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST",(Serializable)airports);
+                intentNext.putExtra("BUNDLE",args);
+                nouvellePosition = nouvellePosition +1;
+                Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
+                intentNext.putExtra("position",nouvellePosition);
+                startActivity(intentNext);
+            }
+        });
+
+        btnLeft.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
+            public void onClick(View view) {
+                Bundle args = new Bundle();
+                args.putSerializable("ARRAYLIST",(Serializable)airports);
+                intentPrevious.putExtra("BUNDLE",args);
+                nouvellePosition = nouvellePosition -1;
+                Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
+                intentPrevious.putExtra("position",nouvellePosition);
+                startActivity(intentPrevious);
+            }
+        });
+
 
     }
 
@@ -90,6 +144,10 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
     public boolean onTouchEvent(MotionEvent event) {
 
         Intent intentMapUp = new Intent(this, MapUp.class);
+        Intent intentNext = new Intent(Informations.this, Informations.class);
+        Intent intentPrevious = new Intent(Informations.this, Informations.class);
+
+
         gestureDetector.onTouchEvent(event);
 
         switch(event.getAction()){
@@ -112,14 +170,28 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                 if (Math.abs(valueX) > MIN_DISTANCE){
                     //detect left to right swipe
                     if(x2>x1){
-                        Toast.makeText(this, "Right is swipe", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "Right Swipe");
+                        //Toast.makeText(this, "Right is swipe", Toast.LENGTH_SHORT).show();
+                        //Log.d(TAG, "Right Swipe");
+                        Bundle args = new Bundle();
+                        args.putSerializable("ARRAYLIST",(Serializable)airports);
+                        intentPrevious.putExtra("BUNDLE",args);
+                        nouvellePosition = nouvellePosition -1;
+                        Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
+                        intentPrevious.putExtra("position",nouvellePosition);
+                        startActivity(intentPrevious);
                     }
 
                     else{
                         //detect right to left swipe
-                        Toast.makeText(this, "Left is swipe", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "Left Swipe");
+                        //Toast.makeText(this, "Left is swipe", Toast.LENGTH_SHORT).show();
+                        //Log.d(TAG, "Left Swipe");
+                        Bundle args = new Bundle();
+                        args.putSerializable("ARRAYLIST",(Serializable)airports);
+                        intentNext.putExtra("BUNDLE",args);
+                        nouvellePosition = nouvellePosition +1;
+                        Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
+                        intentNext.putExtra("position",nouvellePosition);
+                        startActivity(intentNext);
                     }
 
                 }

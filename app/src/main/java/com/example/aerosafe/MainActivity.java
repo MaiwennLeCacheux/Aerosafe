@@ -39,11 +39,15 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private Activity parent = this;
     private static final String TAG = "interrupt";
+
     String airport;
     String temp;
     String testRep = "Aeroport introuvable";
     String URL;
     ArrayList<Airport> airports = new ArrayList<>();
+    //position dans la liste
+    int position = 0;
+
     ArrayList<Airport> saveList = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -153,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     Bundle args = new Bundle();
                     args.putSerializable("ARRAYLIST",(Serializable)saveList);
                     intentInfo.putExtra("BUNDLE",args);
+                    intentInfo.putExtra("position",position);
                     startActivity(intentInfo);
                 }
             });
