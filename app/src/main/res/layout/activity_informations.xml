@@ -9,45 +9,68 @@
     android:background="#C3D7F4">
 
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="31dp"
-        android:layout_height="30dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/olygon1" />
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="32dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/olygon2" />
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="61dp"
-        android:layout_height="61dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginBottom="4dp"
+    <ImageButton
+        android:id="@+id/btnMap"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="5dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/menu_map" />
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="61dp"
-        android:layout_height="61dp"
-        android:layout_marginEnd="4dp"
-        android:layout_marginBottom="4dp"
+
+    <ImageButton
+        android:id="@+id/btnHome"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="5dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/menu_home" />
+
+    <ImageButton
+        android:id="@+id/btnMapUp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="5dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map_up" />
+
+    <ImageButton
+        android:id="@+id/btnRight"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="5dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/polygon_right" />
+
+    <ImageButton
+        android:id="@+id/btnLeft"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="5dp"
+        android:background="#00FFFFFF"
+        android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/polygon_left" />
 
     <TextView
         android:id="@+id/textView"
@@ -62,17 +85,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="410dp"
         android:layout_height="617dp"
+        tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="41dp"
-        tools:ignore="MissingConstraints">
+        tools:layout_editor_absoluteY="41dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <!--
             <TextView
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
@@ -348,20 +374,18 @@
                 android:layout_height="wrap_content"
                 android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/textView16"
-                tools:layout_editor_absoluteY="331dp" />
+                tools:layout_editor_absoluteY="331dp" /> -->
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="174dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="83dp"
-        android:layout_height="83dp"
-        android:layout_marginBottom="5dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/map_up" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

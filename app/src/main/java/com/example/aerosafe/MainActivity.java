@@ -150,9 +150,9 @@ public class MainActivity extends AppCompatActivity {
 
             btnGetInfo.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
                 public void onClick(View view) {
-                  /*  Bundle args = new Bundle();
+                    Bundle args = new Bundle();
                     args.putSerializable("ARRAYLIST",(Serializable)saveList);
-                    intentInfo.putExtra("BUNDLE",args); */
+                    intentInfo.putExtra("BUNDLE",args);
                     startActivity(intentInfo);
                 }
             });

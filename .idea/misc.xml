@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/lecac/AndroidStudioProjects/Aerosafe/app/src/main/res/layout/activity_informations.xml" value="0.2" />
+        <entry key="..\:/Users/lecac/AndroidStudioProjects/Aerosafe/app/src/main/res/layout/activity_informations.xml" value="0.264" />
         <entry key="..\:/Users/lecac/AndroidStudioProjects/Aerosafe/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/lecac/AndroidStudioProjects/Aerosafe/app/src/main/res/layout/activity_map.xml" value="0.26197916666666665" />
+        <entry key="..\:/Users/lecac/AndroidStudioProjects/Aerosafe/app/src/main/res/layout/activity_map_up.xml" value="0.1" />
         <entry key="..\:/Users/lecac/AndroidStudioProjects/Aerosafe/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2703125" />
       </map>
     </option>
