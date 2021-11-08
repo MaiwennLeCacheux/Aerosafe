@@ -15,10 +15,18 @@ public class Airport implements Parcelable {
         @SerializedName("country")
         public String country;
 
-    public Airport(String icao, String country, String name) {
+        @SerializedName("lat")
+        public double lat;
+
+        @SerializedName("lon")
+        public double lon;
+
+    public Airport(String icao, String country, String name, double lat, double lon) {
         this.icao = icao;
         this.name = name;
         this.country = country;
+        this.lat = lat;
+        this.lon = lon;
     }
 
 
@@ -26,6 +34,8 @@ public class Airport implements Parcelable {
         icao = in.readString();
         name = in.readString();
         country = in.readString();
+        lat = in.readDouble();
+        lon = in.readDouble();
     }
 
     public static final Creator<Airport> CREATOR = new Creator<Airport>() {
@@ -50,5 +60,8 @@ public class Airport implements Parcelable {
         dest.writeString(icao);
         dest.writeString(name);
         dest.writeString(country);
+        dest.writeDouble(lat);
+        dest.writeDouble(lon);
+
     }
 }

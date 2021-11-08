@@ -113,9 +113,11 @@ public class MainActivity extends AppCompatActivity {
                     String icao = jsonObject.getString("icao");
                     String name = jsonObject.getString("name");
                     String country = jsonObject.getString("country");
+                    double lat = jsonObject.getDouble("lat");
+                    double lon = jsonObject.getDouble("lon");
                     if (icao.equals("")) {
                     } else {
-                        Airport airport = new Airport(icao, name, country);
+                        Airport airport = new Airport(icao, name, country, lat, lon);
                         airports.add(airport);
                     }
 
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         for (Airport current : airports) {
                             if (search.getText().toString().toUpperCase().equals(current.icao)) {
                                 Log.d(TAG, "onClick: trouve !");
-                                Airport newSave = new Airport(current.icao, current.name, current.country);
+                                Airport newSave = new Airport(current.icao, current.name, current.country, current.lat, current.lon);
                                 existOrNot(newSave);
                                 mAdapter.addToList(newSave);
                                 Taf taftest = new Taf(newSave.icao);

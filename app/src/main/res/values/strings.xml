@@ -22,6 +22,7 @@
     <string name="info_from2_probability">Probability of 40% </string>
     <string name="info_from2_visibility">Visibility: </string>
     <string name="info_from2_other">Other: </string>
+    <string name="user_position">User position</string>
 
 
 </resources>
