@@ -14,6 +14,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.aerosafe.data.Airport;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

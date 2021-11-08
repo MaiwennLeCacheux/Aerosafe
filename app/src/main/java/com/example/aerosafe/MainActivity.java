@@ -5,17 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.aerosafe.data.Airport;
+import com.example.aerosafe.data.Metar;
+import com.example.aerosafe.data.Taf;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -58,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         setContentView(R.layout.activity_main);
+
+        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
 
         recyclerView = findViewById(R.id.recycler_view_airportList);
         recyclerView.setHasFixedSize(true);
@@ -132,6 +138,8 @@ public class MainActivity extends AppCompatActivity {
                     args.putSerializable("ARRAYLIST",(Serializable)saveList);
                     intent.putExtra("BUNDLE",args);
                     startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_out,android.R.anim.fade_in);
+
                 }
             });
 
@@ -140,10 +148,17 @@ public class MainActivity extends AppCompatActivity {
                     if (!search.getText().toString().equals("")) {
                         for (Airport current : airports) {
                             if (search.getText().toString().toUpperCase().equals(current.icao)) {
-                                //Log.d(TAG, "onClick: trouve !");
+                                Log.d(TAG, "onClick: trouve !");
                                 Airport newSave = new Airport(current.icao, current.name, current.country);
                                 existOrNot(newSave);
                                 mAdapter.addToList(newSave);
+                                Taf taftest = new Taf(newSave.icao);
+                                try {
+                                    Thread.sleep(1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                Log.d(TAG, "onClick: " + taftest.raw_text + " here");
                             }
                         }
 
@@ -159,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
                     intentInfo.putExtra("BUNDLE",args);
                     intentInfo.putExtra("position",position);
                     startActivity(intentInfo);
+                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+
                 }
             });
         }

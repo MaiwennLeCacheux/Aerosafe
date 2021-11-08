@@ -45,28 +45,27 @@
         android:id="@+id/btn_get_information"
         android:layout_width="244dp"
         android:layout_height="82dp"
-        android:layout_marginTop="355dp"
         android:backgroundTint="@android:color/white"
         android:text="@string/btn_get_information"
         android:textColor="@color/dark_blue"
         app:layout_constraintBottom_toTopOf="@+id/btnClear"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnClear"
         android:layout_width="wrap_content"
         android:layout_height="44dp"
-        android:layout_marginTop="452dp"
+        android:layout_marginBottom="9dp"
         android:backgroundTint="@color/light_blue"
         android:text="@string/btn_erase_all"
         android:textColor="@color/dark_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
+        />
 
     <ImageView
         android:id="@+id/imageView"
@@ -93,9 +92,9 @@
         android:id="@+id/imageView3"
         android:layout_width="314dp"
         android:layout_height="562dp"
-        android:layout_marginStart="224dp"
-        android:layout_marginBottom="284dp"
-        app:layout_constraintBottom_toTopOf="@+id/btn_get_information"
+        android:layout_marginStart="252dp"
+        android:layout_marginBottom="436dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:srcCompat="@drawable/compass" />
 
@@ -104,23 +103,23 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="445dp"
+        android:layout_marginBottom="8dp"
         android:background="#00FFFFFF"
         android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
         app:srcCompat="@drawable/menu_map" />
 
     <ImageButton
         android:id="@+id/btnHome"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_marginTop="445dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:background="#00FFFFFF"
         android:scaleType="centerInside"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAdd"
         app:srcCompat="@drawable/menu_home_here" />
 
 

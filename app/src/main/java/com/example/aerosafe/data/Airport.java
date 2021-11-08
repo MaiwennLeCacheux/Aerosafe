@@ -1,4 +1,4 @@
-package com.example.aerosafe;
+package com.example.aerosafe.data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
