@@ -33,9 +33,6 @@ public class AirportListAdapter extends RecyclerView.Adapter<AirportListAdapter.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cell_material_airportlist, parent, false);
         ViewHolder vh = new ViewHolder(view);
         return vh;
-
-
-
     }
 
     @Override

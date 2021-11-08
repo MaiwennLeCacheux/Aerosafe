@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,8 +23,7 @@ import java.util.ArrayList;
 public class Informations extends AppCompatActivity implements GestureDetector.OnGestureListener {
 
     ArrayList<Airport> airports = new ArrayList<>();
-    //ArrayList<String> listTest = new ArrayList<>();
-    //int nouvellePosition;
+        private Activity parent = this;
 
     //view pager
     private ViewPager mSlideViewPager;
@@ -54,14 +54,8 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
         mSlideViewPager = (ViewPager)findViewById(R.id.slideViewPager);
         mDotLayout = (ConstraintLayout)findViewById(R.id.dotsLayout);
 
-        sliderAdapter = new SliderAdapter(this);
+        sliderAdapter = new SliderAdapter(this, parent, airports);
         mSlideViewPager.setAdapter(sliderAdapter);
-
-
-
-        /*listTest.add("Test1");
-        listTest.add("Test2");
-        listTest.add("Test3");*/
 
         //initialize gestureDetector
         this.gestureDetector = new GestureDetector(Informations.this, this);
