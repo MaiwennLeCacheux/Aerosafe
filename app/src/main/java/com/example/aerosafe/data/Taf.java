@@ -3,6 +3,7 @@ package com.example.aerosafe.data;
 import com.google.gson.annotations.SerializedName;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
@@ -57,6 +58,17 @@ public class Taf {
 
     public Taf(String icao) {
 
+        raw_text = "";
+        station_id = "";
+        issue_time = "";
+        bulletin_time = "";
+        valid_time_from = "";
+        valid_time_to = "";
+        remarks = "";
+        latitude = 0;
+        longitude = 0;
+        elevation_m = 0;
+
         OkHttpClient okHttpClient = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -87,7 +99,8 @@ public class Taf {
 
                     NodeList dataNodeList = doc.getChildNodes().item(0).getChildNodes().item(13).getChildNodes().item(1).getChildNodes();
 
-                    forecast = new ArrayList<>();
+                    forecast = new ArrayList<Forecast>();
+
 
                     for (int i = 0; i < dataNodeList.getLength(); i++) {
                         if (dataNodeList.item(i).getNodeName().equals("raw_text"))
@@ -96,11 +109,36 @@ public class Taf {
                         else if (dataNodeList.item(i).getNodeName().equals("station_id"))
                             station_id = dataNodeList.item(i).getTextContent();
 
+                        else if (dataNodeList.item(i).getNodeName().equals("issue_time"))
+                            issue_time = dataNodeList.item(i).getTextContent();
+
+                        else if (dataNodeList.item(i).getNodeName().equals("bulletin_time"))
+                            bulletin_time = dataNodeList.item(i).getTextContent();
+
+                        else if (dataNodeList.item(i).getNodeName().equals("valid_time_to"))
+                            valid_time_to = dataNodeList.item(i).getTextContent();
+
+                        else if (dataNodeList.item(i).getNodeName().equals("remarks"))
+                            remarks = dataNodeList.item(i).getTextContent();
+
+                        else if (dataNodeList.item(i).getNodeName().equals("latitude"))
+                            latitude = Float.parseFloat(dataNodeList.item(i).getTextContent());
+
+                        else if (dataNodeList.item(i).getNodeName().equals("longitude"))
+                            longitude = Float.parseFloat(dataNodeList.item(i).getTextContent());
+
+                        else if (dataNodeList.item(i).getNodeName().equals("elevation_m"))
+                            elevation_m = Float.parseFloat(dataNodeList.item(i).getTextContent());
+
+                        else if (dataNodeList.item(i).getNodeName().equals("forecast"))
+                            forecast.add(new Forecast(dataNodeList.item(i).getChildNodes()));
+
 
                     }
                 }
             }
         });
+
     }
 
     private static Document convertStringToXMLDocument(String xmlString)
@@ -125,114 +163,5 @@ public class Taf {
         }
         return null;
     }
-}
-
-class Forecast {
-    @SerializedName("fcst_time_from")
-    public String fcst_time_from;
-
-    @SerializedName("fcst_time_to")
-    public String fcst_time_to;
-
-    @SerializedName("change_indicator")
-    public String change_indicator;
-
-    @SerializedName("time_becoming")
-    public String time_becoming;
-
-    @SerializedName("probability")
-    public int probability;
-
-    @SerializedName("wind_dir_degrees")
-    public short wind_dir_degrees;
-
-    @SerializedName("wind_speed_kt")
-    public int wind_speed_kt;
-
-    @SerializedName("wind_gust_kt")
-    public int wind_gust_kt;
-
-    @SerializedName("wind_shear_hgt_ft_agl")
-    public short wind_shear_hgt_ft_agl;
-
-    @SerializedName("wind_shear_dir_degrees")
-    public short wind_shear_dir_degrees;
-
-    @SerializedName("wind_shear_speed_kt")
-    public int wind_shear_speed_kt;
-
-    @SerializedName("visibility_statute_mi")
-    public float visibility_statute_mi;
-
-    @SerializedName("altim_in_hg")
-    public float altim_in_hg;
-
-    @SerializedName("vert_vis_ft")
-    public short vert_vis_ft;
-
-    @SerializedName("wx_string")
-    public String wx_string;
-
-    @SerializedName("not_decoded")
-    public String not_decoded;
-
-    @SerializedName("sky_condition")
-    public ArrayList<Sky_condition> sky_condition;
-
-    @SerializedName("turbulence_condition")
-    public ArrayList<Turbulence_condition> turbulence_condition;
-
-    @SerializedName("icing_condition")
-    public ArrayList<Icing_condition> icing_condition;
-
-    @SerializedName("temperature")
-    public ArrayList<Temperature> temperature;
-}
-
-class Icing_condition {
-    @SerializedName("icing_intensity")
-    public String icing_intensity;
-
-    @SerializedName("icing_min_alt_ft_agl")
-    public int icing_min_alt_ft_agl;
-
-    @SerializedName("icing_max_alt_ft_agl")
-    public int icing_max_alt_ft_agl;
-}
-
-class Temperature {
-    @SerializedName("valid_time")
-    public String valid_time;
-
-    @SerializedName("sfc_temp_c")
-    public float sfc_temp_c;
-
-    @SerializedName("max_temp_c")
-    public String max_temp_c;
-
-    @SerializedName("min_temp_c")
-    public String min_temp_c;
-}
-
-class Turbulence_condition {
-    @SerializedName("turbulence_intensity")
-    public String turbulence_intensity;
-
-    @SerializedName("turbulence_min_alt_ft_agl")
-    public int turbulence_min_alt_ft_agl;
-
-    @SerializedName("turbulence_max_alt_ft_agl")
-    public int turbulence_max_alt_ft_agl;
-}
-
-class Sky_condition {
-    @SerializedName("sky_cover")
-    public String sky_cover;
-
-    @SerializedName("cloud_base_ft_agl")
-    public int cloud_base_ft_agl;
-
-    @SerializedName("cloud_type")
-    public String cloud_type;
 }
 

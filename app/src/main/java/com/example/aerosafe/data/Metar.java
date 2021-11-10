@@ -71,7 +71,7 @@ public class Metar {
     public String wx_string;
 
     @SerializedName("sky_condition")
-    public ArrayList<SkyCondition> sky_condition;
+    public ArrayList<Sky_condition> sky_condition;
 
     @SerializedName("flight_category")
     public String flight_category;
@@ -117,6 +117,39 @@ public class Metar {
 
     public Metar(String icao) {
 
+        raw_text = "";
+        station_id = "";
+        observation_time = "";
+        latitude = 0;
+        longitude = 0;
+        temp_c = 0;
+        dewpoint_c = 0;
+        wind_dir_degrees = 0;
+        wind_gust_kt = 0;
+        wind_speed_kt = 0;
+        visibility_statute_mi = 0;
+        altim_in_hg = 0;
+        sea_level_pressure_mb = 0;
+        flight_category = "";
+        quality_control_flags = "";
+        three_hr_pressure_tendency_mb = 0;
+        maxT_c = 0;
+        minT_c = 0;
+        maxT24hr_c = 0;
+        minT24hr_c = 0;
+        precip_in = 0;
+        pcp3hr_in = 0;
+        pcp6hr_in = 0;
+        pcp24hr_in = 0;
+        snow_in = 0;
+        vert_vis_ft = 0;
+        metar_type = "";
+        elevation_m = 0;
+
+
+        sky_condition = new ArrayList<Sky_condition>();
+
+
         OkHttpClient okHttpClient = new OkHttpClient();
 
         Request request = new Request.Builder()
@@ -145,9 +178,10 @@ public class Metar {
                     containData = true;
 
 
+
                 NodeList dataNodeList = doc.getChildNodes().item(0).getChildNodes().item(13).getChildNodes().item(1).getChildNodes();
 
-                sky_condition = new ArrayList<>();
+
 
                     for (int i = 0; i < dataNodeList.getLength(); i++) {
                         if (dataNodeList.item(i).getNodeName().equals("raw_text"))
@@ -169,7 +203,7 @@ public class Metar {
                             temp_c = Float.parseFloat(dataNodeList.item(i).getTextContent());
 
                         else if (dataNodeList.item(i).getNodeName().equals("dewpoint_c"))
-                            station_id = dataNodeList.item(i).getTextContent();
+                            dewpoint_c = Float.parseFloat(dataNodeList.item(i).getTextContent());
 
                         else if (dataNodeList.item(i).getNodeName().equals("wind_dir_degrees"))
                             wind_dir_degrees = Integer.parseInt(dataNodeList.item(i).getTextContent());
@@ -183,6 +217,9 @@ public class Metar {
                         else if (dataNodeList.item(i).getNodeName().equals("visibility_statute_mi"))
                             visibility_statute_mi = Float.parseFloat(dataNodeList.item(i).getTextContent());
 
+                        else if (dataNodeList.item(i).getNodeName().equals("altim_in_hg"))
+                            altim_in_hg = Float.parseFloat(dataNodeList.item(i).getTextContent());
+
                         else if (dataNodeList.item(i).getNodeName().equals("sea_level_pressure_mb"))
                             sea_level_pressure_mb = Float.parseFloat(dataNodeList.item(i).getTextContent());
 
@@ -192,12 +229,10 @@ public class Metar {
                         else if (dataNodeList.item(i).getNodeName().equals("wx_string"))
                             wx_string = dataNodeList.item(i).getTextContent();
 
-                        else if (dataNodeList.item(i).getNodeName().equals("sky_condition")) {
-                            String cover = dataNodeList.item(i).getAttributes().getNamedItem("sky_cover").getTextContent();
-                            String cloudString = dataNodeList.item(i).getAttributes().getNamedItem("cloud_base_ft_agl").getTextContent();
-                            int cloudBase = Integer.parseInt(cloudString);
-                            sky_condition.add(new SkyCondition(cover, cloudBase));
-                        } else if (dataNodeList.item(i).getNodeName().equals("flight_category"))
+                        else if (dataNodeList.item(i).getNodeName().equals("sky_condition"))
+                            sky_condition.add(new Sky_condition(dataNodeList.item(i).getAttributes()));
+
+                        else if (dataNodeList.item(i).getNodeName().equals("flight_category"))
                             flight_category = dataNodeList.item(i).getTextContent();
 
                         else if (dataNodeList.item(i).getNodeName().equals("three_hr_pressure_tendency_mb"))

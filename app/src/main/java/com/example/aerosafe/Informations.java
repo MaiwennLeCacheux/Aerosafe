@@ -7,6 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -20,10 +21,14 @@ import com.example.aerosafe.data.Airport;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Informations extends AppCompatActivity implements GestureDetector.OnGestureListener {
+public class Informations extends AppCompatActivity {
 
     ArrayList<Airport> airports = new ArrayList<>();
         private Activity parent = this;
+
+    SwipeListener swipeListener;
+
+
 
     //view pager
     private ViewPager mSlideViewPager;
@@ -36,6 +41,8 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
     private static final int MIN_DISTANCE = 150;
     private GestureDetector gestureDetector;
 
+    private int selector = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,23 +50,16 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
 
         ImageButton btnHome = findViewById(R.id.btnHome);
         ImageButton btnMap = findViewById(R.id.btnMap);
-        //ImageButton btnMapUp = findViewById(R.id.btnMapUp);
+        ImageButton btnMapUp = findViewById(R.id.btnMapUp);
         ImageButton btnRight = findViewById(R.id.btnRight);
         ImageButton btnLeft = findViewById(R.id.btnLeft);
         Intent intent = new Intent(this, MainActivity.class);
         Intent intentMap = new Intent(this, map.class);
-        Intent intentNext = new Intent(Informations.this, Informations.class);
-        Intent intentPrevious = new Intent(Informations.this, Informations.class);
 
         mSlideViewPager = (ViewPager)findViewById(R.id.slideViewPager);
         mDotLayout = (ConstraintLayout)findViewById(R.id.dotsLayout);
 
-        sliderAdapter = new SliderAdapter(this, parent, airports);
-        mSlideViewPager.setAdapter(sliderAdapter);
-
-        //initialize gestureDetector
-        this.gestureDetector = new GestureDetector(Informations.this, this);
-
+        swipeListener = new SwipeListener(btnMapUp);
 
         Intent ReIntent = getIntent();
 
@@ -67,8 +67,7 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
             if (ReIntent.hasExtra("BUNDLE")) {
                 Bundle args = ReIntent.getBundleExtra("BUNDLE");
                 airports = (ArrayList<Airport>) args.getSerializable("ARRAYLIST");
-                //nouvellePosition = intent.getIntExtra("position", 0);
-                Log.d("liste ?", airports.get(0).icao);
+                //int nouvellePosition = intent.getIntExtra("position", 0);
                // Log.d("position ", String.valueOf(nouvellePosition));
 
                 /*affichage dynamique du titre
@@ -79,6 +78,8 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
 
         }
 
+        sliderAdapter = new SliderAdapter(this, parent, airports);
+        mSlideViewPager.setAdapter(sliderAdapter);
 
 
         btnHome.setOnClickListener(new View.OnClickListener() {
@@ -136,12 +137,13 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
     }
 
     //override on touch event
-    @Override
+    /*@Override
     public boolean onTouchEvent(MotionEvent event) {
 
         Intent intentMapUp = new Intent(this, MapUp.class);
         Intent intentNext = new Intent(Informations.this, Informations.class);
         Intent intentPrevious = new Intent(Informations.this, Informations.class);
+
 
 
         gestureDetector.onTouchEvent(event);
@@ -162,35 +164,7 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
                 float valueX = x2 - x1;
                 //getting value for vertical swipe
                 float valueY = y2 - y1;
-                /*
-                if (Math.abs(valueX) > MIN_DISTANCE){
-                    //detect left to right swipe
-                    if(x2>x1){
-                        //Toast.makeText(this, "Right is swipe", Toast.LENGTH_SHORT).show();
-                        //Log.d(TAG, "Right Swipe");
-                        Bundle args = new Bundle();
-                        args.putSerializable("ARRAYLIST",(Serializable)airports);
-                        intentPrevious.putExtra("BUNDLE",args);
-                      //  nouvellePosition = nouvellePosition -1;
-                     //   Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
-                      //  intentPrevious.putExtra("position",nouvellePosition);
-                        startActivity(intentPrevious);
-                    }
 
-                    else{
-                        //detect right to left swipe
-                        //Toast.makeText(this, "Left is swipe", Toast.LENGTH_SHORT).show();
-                        //Log.d(TAG, "Left Swipe");
-                        Bundle args = new Bundle();
-                        args.putSerializable("ARRAYLIST",(Serializable)airports);
-                        intentNext.putExtra("BUNDLE",args);
-                      //  nouvellePosition = nouvellePosition +1;
-                     //   Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
-                      //  intentNext.putExtra("position",nouvellePosition);
-                        startActivity(intentNext);
-                    }
-
-                } */
                 if (Math.abs(valueY) > MIN_DISTANCE){
                     //detect top to bottom swipe
                     if(y2<y1){
@@ -207,34 +181,61 @@ public class Informations extends AppCompatActivity implements GestureDetector.O
         }
         return super.onTouchEvent(event);
     }
+*/
+    private class SwipeListener implements View.OnTouchListener {
+        Intent intentMapUp = new Intent(Informations.this, MapUp.class);
+        GestureDetector gestureDetector;
 
-    @Override
-    public boolean onDown(MotionEvent motionEvent) {
-        return false;
-    }
+        SwipeListener(View view) {
+            int threshold = 100;
+            int velocity_threshold = 100;
 
-    @Override
-    public void onShowPress(MotionEvent motionEvent) {
+            GestureDetector.SimpleOnGestureListener listener =
+                    new GestureDetector.SimpleOnGestureListener(){
+                        @Override
+                        public boolean onDown(MotionEvent e) {
+                            return true;
+                        }
 
-    }
+                        @Override
+                        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                            float xDiff = e2.getX() - e1.getX();
+                            float yDiff = e2.getY() - e1.getY();
+                            try {
+                                if (Math.abs(xDiff) > Math.abs(yDiff)){
+                                    if (Math.abs(xDiff)>threshold && Math.abs(velocityX)>velocity_threshold){
+                                        if(xDiff>0){
+                                        }else {
+                                        }
+                                    }
+                                }else {
+                                    if (Math.abs(yDiff)>threshold && Math.abs(velocityY)>velocity_threshold){
+                                        if(yDiff>0){
 
-    @Override
-    public boolean onSingleTapUp(MotionEvent motionEvent) {
-        return false;
-    }
+                                        }else {
+                                            Bundle args = new Bundle();
+                                            args.putSerializable("ARRAYLIST",(Serializable)airports);
+                                            intentMapUp.putExtra("BUNDLE",args);
+                                            intentMapUp.putExtra("position", mSlideViewPager.getCurrentItem());
+                                            startActivity(intentMapUp);
+                                        }
+                                    }
+                                }
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                            return true;
+                        }
+                    };
 
-    @Override
-    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-        return false;
-    }
+            gestureDetector = new GestureDetector(listener);
 
-    @Override
-    public void onLongPress(MotionEvent motionEvent) {
+            view.setOnTouchListener(this);
+        }
 
-    }
-
-    @Override
-    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
-        return false;
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            return gestureDetector.onTouchEvent(event);
+        }
     }
 }

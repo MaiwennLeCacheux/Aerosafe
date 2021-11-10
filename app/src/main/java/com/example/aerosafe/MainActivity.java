@@ -1,5 +1,7 @@
 package com.example.aerosafe;
 
+import static java.lang.String.valueOf;
+
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.aerosafe.data.Airport;
 import com.example.aerosafe.data.Metar;
@@ -147,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
             btnAdd.setOnClickListener(new View.OnClickListener() { // ajout
                 public void onClick(View view) {
+                    boolean find = false;
                     if (!search.getText().toString().equals("")) {
                         for (Airport current : airports) {
                             if (search.getText().toString().toUpperCase().equals(current.icao)) {
@@ -154,16 +158,15 @@ public class MainActivity extends AppCompatActivity {
                                 Airport newSave = new Airport(current.icao, current.name, current.country, current.lat, current.lon);
                                 existOrNot(newSave);
                                 mAdapter.addToList(newSave);
-                                Taf taftest = new Taf(newSave.icao);
-                                try {
-                                    Thread.sleep(1000);
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                Log.d(TAG, "onClick: " + taftest.raw_text + " here");
+                                find = true;
+
+                                //Log.d(TAG, "onClick: " + valueOf(taftest.forecast.get(2).sky_condition.get(0).sky_cover) + " here");
                             }
                         }
-
+                        if (find == false){
+                            Toast toast = Toast.makeText(getApplicationContext(), "Aéroport introuvable", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
                     }
                 }
 
@@ -171,13 +174,17 @@ public class MainActivity extends AppCompatActivity {
 
             btnGetInfo.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
                 public void onClick(View view) {
-                    Bundle args = new Bundle();
-                    args.putSerializable("ARRAYLIST",(Serializable)saveList);
-                    intentInfo.putExtra("BUNDLE",args);
-                    intentInfo.putExtra("position",position);
-                    startActivity(intentInfo);
-                    overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-
+                    if (saveList.size()==0){
+                        Toast toast = Toast.makeText(getApplicationContext(), "Ajoutez au moins un aeroport", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }else {
+                        Bundle args = new Bundle();
+                        args.putSerializable("ARRAYLIST", (Serializable) saveList);
+                        intentInfo.putExtra("BUNDLE", args);
+                        intentInfo.putExtra("position", position);
+                        startActivity(intentInfo);
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    }
                 }
             });
         }
