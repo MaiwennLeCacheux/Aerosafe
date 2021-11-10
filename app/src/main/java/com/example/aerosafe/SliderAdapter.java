@@ -21,6 +21,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.example.aerosafe.data.Airport;
 import com.example.aerosafe.data.Metar;
 import com.example.aerosafe.data.Taf;
+import com.victor.loading.rotate.RotateLoading;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,10 @@ public class SliderAdapter extends PagerAdapter {
     public ArrayList<String> location;
     public ArrayList<Metar> metarList;
     public ArrayList<Taf> tafList;
+
+
+
+
 
     public SliderAdapter(Context context, Activity parent, ArrayList<Airport> airports){
         this.parent = parent;
@@ -54,14 +59,12 @@ public class SliderAdapter extends PagerAdapter {
             Taf taf = new Taf(listAirports.get(i).icao);
 
             try {
-                Thread.sleep(400);
+                Thread.sleep(500);
                 metarList.add(metar);
                 tafList.add(taf);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-
 
         }
     }
@@ -81,7 +84,6 @@ public class SliderAdapter extends PagerAdapter {
     }
 
     public Object instantiateItem(ViewGroup container, int position){
-
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slide_layout, container, false);
 
@@ -125,22 +127,22 @@ public class SliderAdapter extends PagerAdapter {
             }
         }
 
-            data = data + this.context.getText(R.string.info_visibility) + " " + metarList.get(position).visibility_statute_mi + " miles\n";
+            data = data + this.context.getText(R.string.info_visibility) + " " + Math.ceil(metarList.get(position).visibility_statute_mi * 1.60934)+ " km\n";
             data = data + this.context.getText(R.string.info_wind) + " " + metarList.get(position).wind_dir_degrees + "° " + this.context.getText(R.string.at) + " " + metarList.get(position).wind_speed_kt  + " kt\n";
             data = data + this.context.getText(R.string.info_temperature) + " " + metarList.get(position).temp_c + " °C\n";
             data = data + this.context.getText(R.string.info_dew_point) + " " + metarList.get(position).dewpoint_c + " °C\n";
             data = data + this.context.getText(R.string.info_pressure) + " " + Math.ceil(metarList.get(position).altim_in_hg * 33.864) + " millibars\n";
 
-        titreTaf1.setVisibility(view.INVISIBLE);
-        tafData1.setVisibility(view.INVISIBLE);
-        titreTaf2.setVisibility(view.INVISIBLE);
-        tafData2.setVisibility(view.INVISIBLE);
-        titreTaf3.setVisibility(view.INVISIBLE);
-        tafData3.setVisibility(view.INVISIBLE);
-        titreTaf4.setVisibility(view.INVISIBLE);
-        tafData4.setVisibility(view.INVISIBLE);
-        titreTaf5.setVisibility(view.INVISIBLE);
-        tafData5.setVisibility(view.INVISIBLE);
+        titreTaf1.setVisibility(view.GONE);
+        tafData1.setVisibility(view.GONE);
+        titreTaf2.setVisibility(view.GONE);
+        tafData2.setVisibility(view.GONE);
+        titreTaf3.setVisibility(view.GONE);
+        tafData3.setVisibility(view.GONE);
+        titreTaf4.setVisibility(view.GONE);
+        tafData4.setVisibility(view.GONE);
+        titreTaf5.setVisibility(view.GONE);
+        tafData5.setVisibility(view.GONE);
 
         if(tafList.get(position).forecast.size()>0) {
             for (int i = 0; i < tafList.get(position).forecast.size(); i++) {
@@ -162,7 +164,7 @@ public class SliderAdapter extends PagerAdapter {
                     }
 
                     if (tafList.get(position).forecast.get(i).visibility_statute_mi != 0) {
-                        dataTaf1 = dataTaf1 + this.context.getText(R.string.info_visibility) + " " + tafList.get(position).forecast.get(i).visibility_statute_mi + " miles\n";
+                        dataTaf1 = dataTaf1 + this.context.getText(R.string.info_visibility) + " " + Math.ceil(tafList.get(position).forecast.get(i).visibility_statute_mi* 1.60934) + " km\n";
                     }
                     if (tafList.get(position).forecast.get(i).wind_speed_kt != 0) {
                         dataTaf1 = dataTaf1 + this.context.getText(R.string.info_wind) + " " + tafList.get(position).forecast.get(i).wind_dir_degrees + "° " + this.context.getText(R.string.at) + " " + tafList.get(position).forecast.get(i).wind_speed_kt + " kt\n";
@@ -278,7 +280,6 @@ public class SliderAdapter extends PagerAdapter {
         titreTaf5.setText(titleTaf5);
         tafData5.setText(dataTaf5);
         container.addView(view);
-
         return view;
     }
 
