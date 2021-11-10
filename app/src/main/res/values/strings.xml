@@ -21,6 +21,10 @@
     <string name="user_position">User position</string>
     <string name="at">at</string>
     <string name="info_flight_category">Flight category :</string>
+    <string name="delete_confirm">Confirm</string>
+    <string name="delete_empty">Empty the list ?</string>
+    <string name="delete_yes">Yes</string>
+    <string name="delete_no">No</string>
 
 
 </resources>

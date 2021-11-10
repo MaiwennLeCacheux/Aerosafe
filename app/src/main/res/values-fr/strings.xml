@@ -21,6 +21,10 @@
     <string name="info_to">à</string>
     <string name="at">à</string>
     <string name="info_flight_category">Catégorie de vol :</string>
+    <string name="delete_confirm">Confirmer</string>
+    <string name="delete_empty">Vider la liste ?</string>
+    <string name="delete_yes">Oui</string>
+    <string name="delete_no">Non</string>
 
 
     <string name="user_position">Position de l\'utilisateur</string>
