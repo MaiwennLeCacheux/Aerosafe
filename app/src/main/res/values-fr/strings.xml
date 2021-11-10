@@ -24,8 +24,8 @@
     <string name="Add_one">Veuillez ajouter au moins 1 aéroport</string>
     <string name="info_flight_category">Catégorie de vol :</string>
 
-    <string name="delete_confirm">Confirmer</string>
-    <string name="delete_empty">Vider la liste ?</string>
+    <string name="delete_confirm">Attention !</string>
+    <string name="delete_empty">Etes-vous sûrs de vouloir vider la liste ?</string>
     <string name="delete_yes">Oui</string>
     <string name="delete_no">Non</string>
 

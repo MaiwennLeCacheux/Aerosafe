@@ -15,7 +15,9 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -135,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             btnClear.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     if (saveList.size() > 0) {
+                        /*
                         new AlertDialog.Builder(view.getContext())
                                 .setTitle(getText(R.string.delete_confirm))
                                 .setMessage(getText(R.string.delete_empty))
@@ -151,7 +154,33 @@ public class MainActivity extends AppCompatActivity {
                                 .setIcon(android.R.drawable.ic_dialog_alert)
                                 .show();
 
+                         */
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        ViewGroup viewGroup = findViewById(android.R.id.content);
+                        View dialogView = LayoutInflater.from(view.getContext()).inflate(R.layout.dialogue_view, viewGroup, false);
+                        Button buttonYes =dialogView.findViewById(R.id.buttonYes);
+                        Button buttonNo =dialogView.findViewById(R.id.buttonNo);
+                        builder.setView(dialogView);
+                        final AlertDialog alertDialog = builder.create();
+                        buttonYes.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mAdapter.clearList(); //effacer la liste d'aeroports recherchés
+                                alertDialog.dismiss();
+                            }
+                        });
+                        buttonNo.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.dismiss();
+                            }
+                        });
+                        alertDialog.show();
+
                     }
+
+
                 }
             });
 
