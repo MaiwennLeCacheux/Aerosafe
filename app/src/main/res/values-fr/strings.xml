@@ -17,8 +17,8 @@
     <string name="info_from_clouds">Nuages: </string>
     <string name="info_from_visibility">Visibilité : </string>
     <string name="info_from_wind">Vent : </string>
-    <string name="info_from">From</string>
-    <string name="info_to">to</string>
+    <string name="info_from">Depuis</string>
+    <string name="info_to">à</string>
     <string name="at">à</string>
     <string name="info_flight_category">Catégorie de vol :</string>
 
