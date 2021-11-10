@@ -16,6 +16,7 @@
     <string name="info_from">From</string>
     <string name="info_to">to</string>
     <string name="info_from_clouds">Clouds : </string>
+    <string name="info_from_proba">Probability : </string>
     <string name="info_from_visibility">Visibility : </string>
     <string name="info_from_wind">Wind: </string>
     <string name="user_position">User position</string>

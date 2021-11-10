@@ -4,7 +4,7 @@
     <string name="btn_search">Recherche</string>
     <string name="btn_get_information">Obtenir les informations</string>
     <string name="btn_erase_all">Tout effacer</string>
-    <string name="inside_search_bar">Entrer un code ICAO</string>
+    <string name="inside_search_bar">Entrer un code OACI</string>
     <string name="info_weather_conditions">Conditions météo le </string>
     <string name="info_present_conditions"><b>Conditions présentes : </b></string>
     <string name="info_clouds">Nuages : </string>
@@ -17,6 +17,7 @@
     <string name="info_from_clouds">Nuages: </string>
     <string name="info_from_visibility">Visibilité : </string>
     <string name="info_from_wind">Vent : </string>
+    <string name="info_from_proba">Probabilité : </string>
     <string name="info_from">De</string>
     <string name="info_to">à</string>
     <string name="at">à</string>

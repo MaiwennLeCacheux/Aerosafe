@@ -169,6 +169,9 @@ public class SliderAdapter extends PagerAdapter {
                     if (tafList.get(position).forecast.get(i).wind_speed_kt != 0) {
                         dataTaf1 = dataTaf1 + this.context.getText(R.string.info_wind) + " " + tafList.get(position).forecast.get(i).wind_dir_degrees + "° " + this.context.getText(R.string.at) + " " + tafList.get(position).forecast.get(i).wind_speed_kt + " kt\n";
                     }
+                    if (tafList.get(position).forecast.get(i).probability != 0) {
+                        dataTaf1 = dataTaf1 + this.context.getText(R.string.info_from_proba) + " " + tafList.get(position).forecast.get(i).probability + " %\n";
+                    }
 
                 }
 
@@ -192,6 +195,9 @@ public class SliderAdapter extends PagerAdapter {
                     if (tafList.get(position).forecast.get(i).wind_speed_kt != 0) {
                         dataTaf2 = dataTaf2 + this.context.getText(R.string.info_wind) + " " + tafList.get(position).forecast.get(i).wind_dir_degrees + "° " + this.context.getText(R.string.at) + " " + tafList.get(position).forecast.get(i).wind_speed_kt + " kt\n";
                     }
+                    if (tafList.get(position).forecast.get(i).probability != 0) {
+                        dataTaf2 = dataTaf2 + this.context.getText(R.string.info_from_proba) + " " + tafList.get(position).forecast.get(i).probability + " %\n";
+                    }
 
                 }
                 if (i == 2) {
@@ -213,6 +219,9 @@ public class SliderAdapter extends PagerAdapter {
                     }
                     if (tafList.get(position).forecast.get(i).wind_speed_kt != 0) {
                         dataTaf3 = dataTaf3 + this.context.getText(R.string.info_wind) + " " + tafList.get(position).forecast.get(i).wind_dir_degrees + "° " + this.context.getText(R.string.at) + " " + tafList.get(position).forecast.get(i).wind_speed_kt + " kt\n";
+                    }
+                    if (tafList.get(position).forecast.get(i).probability != 0) {
+                        dataTaf3 = dataTaf3 + this.context.getText(R.string.info_from_proba) + " " + tafList.get(position).forecast.get(i).probability + " %\n";
                     }
 
                 }
@@ -236,6 +245,9 @@ public class SliderAdapter extends PagerAdapter {
                     if (tafList.get(position).forecast.get(i).wind_speed_kt != 0) {
                         dataTaf4 = dataTaf4 + this.context.getText(R.string.info_wind) + " " + tafList.get(position).forecast.get(i).wind_dir_degrees + "° " + this.context.getText(R.string.at) + " " + tafList.get(position).forecast.get(i).wind_speed_kt + " kt\n";
                     }
+                    if (tafList.get(position).forecast.get(i).probability != 0) {
+                        dataTaf4 = dataTaf4 + this.context.getText(R.string.info_from_proba) + " " + tafList.get(position).forecast.get(i).probability + " %\n";
+                    }
 
                 }
                 if (i == 4) {
@@ -257,6 +269,9 @@ public class SliderAdapter extends PagerAdapter {
                     }
                     if (tafList.get(position).forecast.get(i).wind_speed_kt != 0) {
                         dataTaf5 = dataTaf5 + this.context.getText(R.string.info_wind) + " " + tafList.get(position).forecast.get(i).wind_dir_degrees + "° " + this.context.getText(R.string.at) + " " + tafList.get(position).forecast.get(i).wind_speed_kt + " kt\n";
+                    }
+                    if (tafList.get(position).forecast.get(i).probability != 0) {
+                        dataTaf5 = dataTaf5 + this.context.getText(R.string.info_from_proba) + " " + tafList.get(position).forecast.get(i).probability + " %\n";
                     }
 
                 }
