@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.animation.Animator;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -132,9 +134,25 @@ public class MainActivity extends AppCompatActivity {
 
             btnClear.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
-                    mAdapter.clearList(); //effacer la liste d'aeroports recherchés
-                }
+                    if (saveList.size() > 0) {
+                        new AlertDialog.Builder(view.getContext())
+                                .setTitle(getText(R.string.delete_confirm))
+                                .setMessage(getText(R.string.delete_empty))
+                                .setPositiveButton(getText(R.string.delete_yes), new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        mAdapter.clearList(); //effacer la liste d'aeroports recherchés
+                                    }
+                                })
+                                .setNegativeButton(getText(R.string.delete_no), new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // do nothing
+                                    }
+                                })
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .show();
 
+                    }
+                }
             });
 
             btnMap.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
@@ -160,11 +178,10 @@ public class MainActivity extends AppCompatActivity {
                                 mAdapter.addToList(newSave);
                                 find = true;
 
-                                //Log.d(TAG, "onClick: " + valueOf(taftest.forecast.get(2).sky_condition.get(0).sky_cover) + " here");
-                            }
+                              }
                         }
                         if (find == false){
-                            Toast toast = Toast.makeText(getApplicationContext(), "Aéroport introuvable", Toast.LENGTH_SHORT);
+                            Toast toast = Toast.makeText(getApplicationContext(), getText(R.string.unkonw_airport), Toast.LENGTH_SHORT);
                             toast.show();
                         }
                     }
@@ -175,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
             btnGetInfo.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
                 public void onClick(View view) {
                     if (saveList.size()==0){
-                        Toast toast = Toast.makeText(getApplicationContext(), "Ajoutez au moins un aeroport", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getApplicationContext(), getText(R.string.Add_one), Toast.LENGTH_SHORT);
                         toast.show();
                     }else {
                         Bundle args = new Bundle();

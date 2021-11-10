@@ -20,6 +20,8 @@
     <string name="info_from_wind">Wind: </string>
     <string name="user_position">User position</string>
     <string name="at">at</string>
+    <string name="unkonw_airport">Unknown airport</string>
+    <string name="Add_one">Please add at least one airport</string>
     <string name="info_flight_category">Flight category :</string>
     <string name="delete_confirm">Confirm</string>
     <string name="delete_empty">Empty the list ?</string>
