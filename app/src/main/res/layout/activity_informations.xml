@@ -8,17 +8,41 @@
     android:id="@+id/informationlayout"
     android:background="#C3D7F4">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/slideViewPager"
-        android:layout_width="405dp"
-        android:layout_height="731dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="SpeakableTextPresentCheck">
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/slideViewPager"
+            android:layout_width="405dp"
+            android:layout_height="731dp"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:layout_editor_absoluteX="3dp">
 
-    </androidx.viewpager.widget.ViewPager>
+        </androidx.viewpager.widget.ViewPager>
+
+        <ImageView
+            android:id="@+id/background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@color/ic_launcher_background" />
+
+        <com.victor.loading.rotate.RotateLoading
+            android:id="@+id/rotateloading"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/slideViewPager" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

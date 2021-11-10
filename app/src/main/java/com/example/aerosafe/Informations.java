@@ -13,10 +13,12 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aerosafe.data.Airport;
+import com.victor.loading.rotate.RotateLoading;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -55,9 +57,16 @@ public class Informations extends AppCompatActivity {
         ImageButton btnLeft = findViewById(R.id.btnLeft);
         Intent intent = new Intent(this, MainActivity.class);
         Intent intentMap = new Intent(this, map.class);
+        RotateLoading rotateLoading = findViewById(R.id.rotateloading);
+
+        ImageView background = findViewById(R.id.background);
+
+        rotateLoading.start();
+
 
         mSlideViewPager = (ViewPager)findViewById(R.id.slideViewPager);
         mDotLayout = (ConstraintLayout)findViewById(R.id.dotsLayout);
+
 
         swipeListener = new SwipeListener(btnMapUp);
 
@@ -78,8 +87,10 @@ public class Informations extends AppCompatActivity {
 
         }
 
+
         sliderAdapter = new SliderAdapter(this, parent, airports);
         mSlideViewPager.setAdapter(sliderAdapter);
+
 
 
         btnHome.setOnClickListener(new View.OnClickListener() {
@@ -91,14 +102,6 @@ public class Informations extends AppCompatActivity {
             }
         });
 
-       /* btnMapUp.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST",(Serializable)airports);
-                intentMapUp.putExtra("BUNDLE",args);
-                startActivity(intentMapUp);
-            }
-        }); */
 
         btnMap.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
             public void onClick(View view) {
@@ -108,80 +111,22 @@ public class Informations extends AppCompatActivity {
                 startActivity(intentMap);
             }
         });
-        /*
-        btnRight.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
-            public void onClick(View view) {
-                Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST",(Serializable)airports);
-                intentNext.putExtra("BUNDLE",args);
-                //nouvellePosition = nouvellePosition +1;
-              //  Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
-               // intentNext.putExtra("position",nouvellePosition);
-                startActivity(intentNext);
-            }
-        });
 
-        btnLeft.setOnClickListener(new View.OnClickListener() { // envoi du tableau d'aeroports
-            public void onClick(View view) {
-                Bundle args = new Bundle();
-                args.putSerializable("ARRAYLIST",(Serializable)airports);
-                intentPrevious.putExtra("BUNDLE",args);
-                //nouvellePosition = nouvellePosition -1;
-            //    Log.d("Nouvelle position ", String.valueOf(nouvellePosition));
-               // intentPrevious.putExtra("position",nouvellePosition);
-                startActivity(intentPrevious);
-            }
-        });
-        */
+        getWindow().getDecorView().getRootView().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
 
+                rotateLoading.stop();
+                background.setVisibility(View.GONE);
+
+            }
+        }, 2000);
     }
 
-    //override on touch event
-    /*@Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        Intent intentMapUp = new Intent(this, MapUp.class);
-        Intent intentNext = new Intent(Informations.this, Informations.class);
-        Intent intentPrevious = new Intent(Informations.this, Informations.class);
 
 
 
-        gestureDetector.onTouchEvent(event);
-
-        switch(event.getAction()){
-            //starting to swipe time gesture
-            case MotionEvent.ACTION_DOWN:
-                x1 = event.getX();
-                y1 = event.getY();
-                break;
-
-            //ending time swipe gesture
-            case MotionEvent.ACTION_UP:
-                x2 = event.getX();
-                y2 = event.getY();
-
-                //getting value for horizontal swipe
-                float valueX = x2 - x1;
-                //getting value for vertical swipe
-                float valueY = y2 - y1;
-
-                if (Math.abs(valueY) > MIN_DISTANCE){
-                    //detect top to bottom swipe
-                    if(y2<y1){
-
-                        //detect bottom to top swipe
-                        //Toast.makeText(this, "Top is swipe", Toast.LENGTH_SHORT).show();
-                        //Log.d(TAG, "Top Swipe");
-                        Bundle args = new Bundle();
-                        args.putSerializable("ARRAYLIST",(Serializable)airports);
-                        intentMapUp.putExtra("BUNDLE",args);
-                        startActivity(intentMapUp);
-                    }
-                }
-        }
-        return super.onTouchEvent(event);
-    }
-*/
     private class SwipeListener implements View.OnTouchListener {
         Intent intentMapUp = new Intent(Informations.this, MapUp.class);
         GestureDetector gestureDetector;
@@ -231,6 +176,8 @@ public class Informations extends AppCompatActivity {
             gestureDetector = new GestureDetector(listener);
 
             view.setOnTouchListener(this);
+
+
         }
 
         @Override
