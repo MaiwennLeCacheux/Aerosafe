@@ -139,8 +139,9 @@ public class map extends FragmentActivity implements OnMapReadyCallback, GoogleM
         map.setMapType(GoogleMap.MAP_TYPE_HYBRID); // Type de map (vue satellite)
         Marker marker = map.addMarker(new MarkerOptions().position(posUser).title(txtPos)); // Ajout du marker
         marker.setTag(0);
-        map.addMarker(new MarkerOptions().position(new LatLng(airports.get(0).lat, airports.get(0).lon)).title(airports.get(0).icao).snippet(airports.get(0).name));
-
+        if(airports.size()>0) {
+            map.addMarker(new MarkerOptions().position(new LatLng(airports.get(0).lat, airports.get(0).lon)).title(airports.get(0).icao).snippet(airports.get(0).name));
+        }
         map.moveCamera(CameraUpdateFactory.newLatLng(posUser)); // Centre la caméra sur le marker
 
         if(airports.size()>1) {
